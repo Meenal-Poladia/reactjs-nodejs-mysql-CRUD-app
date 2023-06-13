@@ -24,6 +24,21 @@ app.get("/books", (request, response) => {
     })
 })
 
+app.post("/books", (request, response) => {
+    const query = "INSERT INTO books(`title`, `description`, `cover`) VALUES (?)";
+
+    const values = [
+        request.body.title,
+        request.body.description,
+        request.body.cover,
+    ];
+
+    db.query(query, [values], (err, data) => {
+        if (err) return response.send(err);
+        return response.json('Book has been created successfully');
+    });
+})
+
 app.listen(8000, () => {
     console.log('Connected');
 })
