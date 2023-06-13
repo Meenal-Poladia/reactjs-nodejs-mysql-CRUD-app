@@ -1,5 +1,6 @@
 import express from "express";
 import mysql from "mysql";
+import cors from "cors";
 
 const app = express();
 
@@ -10,6 +11,7 @@ export const db = mysql.createConnection({
     database: 'test'
 })
 
+app.use(cors());
 app.use(express.json());
 
 app.get("/", (request, response) => {
